@@ -37,9 +37,7 @@ function addLike() {
 
 
             calculHeart()
-            // eslint-disable-next-line no-undef
             barre.textContent = somme + 1;
-
 
 
 
