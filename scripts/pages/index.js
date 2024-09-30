@@ -1,46 +1,73 @@
-    async function getPhotographers() {
-        // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet, 
-        // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
-        let photographers = [
-            {
-                "name": "Ma data test",
-                "id": 1,
-                "city": "Paris",
-                "country": "France",
-                "tagline": "Ceci est ma data test",
-                "price": 400,
-                "portrait": "account.png"
-            },
-            {
-                "name": "Autre data test",
-                "id": 2,
-                "city": "Londres",
-                "country": "UK",
-                "tagline": "Ceci est ma data test 2",
-                "price": 500,
-                "portrait": "account.png"
-            },
-        ]
-        // et bien retourner le tableau photographers seulement une fois récupéré
-        return ({
-            photographers: [...photographers, ...photographers, ...photographers]})
+function genererPhotographe(photographe) {
+    for (let i = 0; i < photographe.length; i++) {
+
+        const article = photographe[i];
+
+        const imageElement = document.createElement("img");
+        imageElement.src = article.portrait;
+        const photographerLink = document.createElement('a');
+        photographerLink.href = `photographer.html?id=${article.id}`;
+        photographerLink.setAttribute('aria-label', `Voir les détails de ${article.name}`);
+       
+
+        const nomElement = document.createElement("h2");
+        nomElement.innerText = article.name;
+
+        const cityElemnt = document.createElement("h3");
+        cityElemnt.innerText = `${article.city},${article.country} `;
+
+        const taglinElement =document.createElement("h4");
+        taglinElement.innerText= article.tagline;
+
+        const priceElement =document.createElement("h5");
+        priceElement.innerText=`${article.price} €/jour`;
+
+
+
+        //Rattachement de nos balises au DOM
+        const sectionFiches = document.querySelector(".photographer_section");
+        const photographeElement = document.createElement("article");
+        sectionFiches.appendChild(photographeElement);
+        photographeElement.appendChild(imageElement);
+        photographeElement.appendChild(photographerLink)
+        photographerLink.appendChild(imageElement);
+        photographerLink.appendChild(nomElement);
+        photographeElement.appendChild(cityElemnt);
+        photographeElement.appendChild(taglinElement);
+        photographeElement.appendChild(priceElement);
+
+        
+        
+        
+
+        
+
+        
+
+
     }
 
-    async function displayData(photographers) {
-        const photographersSection = document.querySelector(".photographer_section");
 
-        photographers.forEach((photographer) => {
-            const photographerModel = photographerTemplate(photographer);
-            const userCardDOM = photographerModel.getUserCardDOM();
-            photographersSection.appendChild(userCardDOM);
-        });
-    }
 
-    async function init() {
-        // Récupère les datas des photographes
-        const { photographers } = await getPhotographers();
-        displayData(photographers);
-    }
-    
-    init();
-    
+}
+
+async function data() {
+    const reponse = await fetch('data/photographers.json');
+    const data = await reponse.json();
+    const photographe = data.photographers
+    console.log(photographe)
+
+    genererPhotographe(photographe);
+
+
+
+
+}
+
+
+data();
+
+
+
+
+

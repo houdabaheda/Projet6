@@ -1,4 +1,3 @@
-@import url("photographer.css");
 
 body {
     font-family: "DM Sans", sans-serif;
@@ -39,12 +38,71 @@ h1 {
     flex-direction: column;
 }
 
+.photographer_section a {
+    text-decoration: none;
+    display:flex ;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .photographer_section article h2 {
+    text-decoration: none; 
     color: #D3573C;
+    text-align: center;
+    font-family: "DM Sans";
     font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 20px;
+    margin-bottom: 0px;
 }
 
 .photographer_section article img {
     height: 200px;
     width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    /* Cache la partie de l'image qui dépasse du cercle */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    /* Ajoute une ombre douce autour du cercle */
+
+
+}
+
+.photographer_section article h3 {
+    color: #901C1C;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 8px;
+    margin-bottom: 3px;
+}
+
+.photographer_section article h4 {
+    color: #000;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.photographer_section article h5 {
+    color: #757575;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 8px;
+
 }

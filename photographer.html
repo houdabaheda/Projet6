@@ -1,37 +1,112 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <header>
-      <img src="assets/images/logo.png" class="logo" />
-    </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
-    </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
+<html lang="fr">
+
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="css/photographer.css" rel="stylesheet" type="text/css">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <title>Fisheye - photographe </title>
+</head>
+
+<body>
+  <nav role="navigation" aria-label="Navigation principale">
+    <a href="index.html">
+      <img src="assets/images/logo.png" class="logo" alt="Logo de Fisheye">
+    </a>
+  </nav>
+
+  <header role="banner" class="photograph-header">
+    <button class="contact_button" onclick="displayModal()" aria-controls="contact_modal">
+      Contactez-moi
+    </button>
+  </header>
+
+  <div id="contact_modal" >
+    <div class="modall">
+      <header>
+        <div class="contact">
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
-  </body>
+        </div>
+        <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer" aria-label="Fermer la fenêtre de contact">
+      </header>
+      
+      <div class="form" >
+
+        <div class="formData prenom">
+          <label for="first">Prénom</label><br>
+          <input class="text-control" type="text" id="first" name="first" minlength="2"><br>
+          <span class="error-message " id="prenomError"></span>
+        </div>
+
+        <div class="formData nom">
+          <label for="last">Nom</label><br>
+          <input class="text-control" type="text" id="last" name="last"><br>
+          <span class="error-message " id="nomError"></span>
+        </div>
+
+        <div class="formData">
+          <label for="email">E-mail</label><br>
+          <input class="text-control" type="email" id="email" name="email"><br>
+          <span class="error-message" id="emailError"></span>
+        </div>
+
+        <div class="formData">
+          <label for="message">Votre message</label><br>
+          <textarea name="message" id="message" rows="4" cols="50"></textarea>
+          <span class="error-message" id="messageError"></span>
+        </div>
+
+        <button class="contact_button_envoyer" aria-label="Envoyer le formulaire">Envoyer</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Contenu principal de la page -->
+  <main id="main" role="main">
+    <section class="tri" aria-label="Options de tri">
+      <h1>Trier par</h1>
+      <select id="sort-options" aria-label="Trier par" class="custom-select">
+        <option value="popularite">Popularité</option>
+        <option value="date">Date</option>
+        <option value="titre">Titre</option>
+      </select>
+    </section>
+
+    <!-- Galerie d'images -->
+    <section class="image" aria-label="Galerie d'images">
+
+    </section>
+  </main>
+
+
+  <footer class="barre" role="contentinfo">
+    <span class="number" aria-label="Nombre total de likes"></span>
+    <span class="heart" aria-hidden="true">❤</span>
+    <span class="price" aria-label="Prix total"></span>
+  </footer>
+
+
+  <!-- Modal pour agrandissement -->
+  <div id="modal" class="modal" role="dialog"  aria-labelledby="modal-title">
+    <button class="close" aria-label="Fermer la fenêtre d'agrandissement">&times;</button>
+    <button class="prev" aria-label="Image précédente">&#10094;</button>
+    <button class="next" aria-label="Image suivante">&#10095;</button>
+    <div class="modal-content">
+      <div id="modal-media-container"></div>
+      <p id="modal-title" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <script src="/scripts/classes/MediaFactory.js"></script>
+  <script src="/scripts/templates/photographer.js"></script>
+  <script src="/scripts/pages/photographer.js"></script>
+  <script src="/scripts/utils/contactForm.js"></script>
+
+</body>
+
 </html>

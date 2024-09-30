@@ -2,13 +2,30 @@
     display: none;
 }
 
-.photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+.logo {
+    margin-left: 0px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-.contact_button {
+body {
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.photograph-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FAFAFA;
+    height: 300px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.contact_button , .contact_button_envoyer {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -19,9 +36,87 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+
+
+
+
+
+
 }
 
-.modal {
+.photograph-header img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+}
+
+.info h2 {
+    color: #D3573C;
+    font-family: "DM Sans";
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0%;
+
+}
+
+
+.info h3 {
+    color: #901C1C;
+    font-family: "DM Sans";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0%;
+
+}
+
+.info h4 {
+    color: #525252;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0%;
+}
+
+#contact_modal{
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgb(255 255 255 / 37%);
+
+}
+
+.error-message {
+    color: red;    /* Optionnel : couleur des messages d'erreurs */
+    font-size: 0.9em;
+}
+
+
+.modall {
     border-radius: 5px;
     background-color: #DB8876;
     width: 50%;
@@ -30,37 +125,57 @@
     align-items: center;
     justify-content: space-between;
     padding: 35px;
-    margin: auto;
+    margin: 5% auto;
 }
 
-.modal header {
+.modall header {
     justify-content: space-between;
     width: 100%;
 }
 
-.modal header img {
+.modall header img {
     cursor: pointer;
 }
-
-.modal header h2 {
+.contact {
+    display: flex;
+    flex-direction: column;
+    margin-top: 53px;
+    
+}
+.modall header h2  {
     font-size: 64px;
     font-weight: normal;
     text-align: center;
+    margin-bottom: 0%;
+}
+.modall header h3 {
+    font-size: 64px;
+    font-weight: normal;
+    margin-top: 0%;
 }
 
-form {
+#message {
+    border-radius: 5px;
+    width: 97%;  /* La largeur peut être ajustée selon vos besoins, 100% occuperait toute la largeur disponible */
+    height: 150px;  /* Vous pouvez ajuster la hauteur ici, par exemple à 150 pixels */
+    padding: 10px;  /* Espace interne pour rendre la zone plus lisible */
+    font-size: 16px;  /* Ajustez la taille de la police si nécessaire */
+  }
+  
+.form{
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 70px;
 }
 
-form label {
+.form label {
     color: #312E2E;
     font-size: 36px;
 }
 
-form div {
+.form div {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -68,9 +183,233 @@ form div {
     margin-bottom: 26px;
 }
 
-form input {
+.form input {
     width: 100%;
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+.tri {
+    display: flex;
+    flex-direction: row;
+}
+
+.custom-select {
+    width: 170px;
+    height: 69px;
+    color: #FFF;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background-color: #990000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 9px;
+    padding-left: 10px;
+   
+
+
+}
+
+.custom-select:focus {
+    outline: none;
+    box-shadow: 0 0 3px 3px rgba(153, 0, 0, 0.5);
+}
+
+.tri h1 {
+    color: #000;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 9px;
+}
+
+.image {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 95px;
+    margin-top: 20px;
+
+}
+
+.image img {
+    height: 300px;
+    width: 350px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.image video {
+    height: 300px;
+    width: 350px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+
+
+.title-likes-heart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 350px;
+
+
+}
+
+.title-likes-heart p {
+    color: #901C1C;
+    font-family: "DM Sans";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0%;
+    margin-top: 6px;
+}
+
+.likes-heart {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.likes-heart h1 {
+    margin-right: 7px;
+    margin-top: 9px;
+    color: #901C1C;
+
+}
+
+.likes-heart i {
+    margin-top: 12px;
+    display: flex;
+    font-size: 20px;
+    cursor: pointer;
+    color: #901C1C;
+
+}
+
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    background-color: rgb(255 255 255 / 94%);
+}
+
+.modal-content {
+    max-width: 1240px;
+    position: relative;
+    margin: 3% auto;
+    /* Réduire la marge pour augmenter l'espace d'affichage */
+    padding: 10px;
+    width: 60%;
+    height: 80%;
+}
+
+.modal-content p {
+    
+    color: #901C1C;
+    font-family: "DM Sans";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 100%;
+}
+
+#modal-media-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+
+}
+
+
+
+.modal-content img,
+.modal-content video {
+    object-fit: cover;
+    width: 100%;
+    /* Utilise toute la largeur disponible du modal */
+    height: 100%;
+    /* Préserve le ratio d'aspect */
+    /* Utilise jusqu'à 80% de la hauteur de la vue pour ne pas déborder */
+}
+
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    font-size: 42px;
+    color: #901C1C;
+}
+
+.close {
+    right: 16%;
+    top: 18px;
+    cursor: pointer;
+    position: absolute;
+    font-size: 80px;
+    color: #901C1C;
+}
+
+.prev {
+    left: 16%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.next {
+    right: 16%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+.barre{
+    position: fixed;
+    right: 36px;
+    bottom: 0px;
+    background-color: #d08377;
+    padding: 10px 20px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.barre .number {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.barre .heart {
+    color: black;
+    font-size: 18px;
+    margin-right: 50px;
+}
+
+.barre .price {
+    color: #333;
+    font-weight: bold;
 }
