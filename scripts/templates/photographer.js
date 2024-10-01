@@ -22,11 +22,6 @@ function addLike() {
             let somme = mediaTitless.reduce((acc, current) => acc + current, 0);
             const barre = document.querySelector(".barre .number")
 
-
-
-
-
-
             console.log(event)
             //recupirer le frere de hearticon
             let consth1Elemnt = hearticon.previousElementSibling;
@@ -38,16 +33,6 @@ function addLike() {
 
             calculHeart()
             barre.textContent = somme + 1;
-
-
-
-
-
-
-
-
-
-
         });
     }
 

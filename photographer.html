@@ -13,13 +13,13 @@
 </head>
 
 <body>
-  <nav role="navigation" aria-label="Navigation principale">
+  <nav  aria-label="Navigation principale">
     <a href="index.html">
       <img src="assets/images/logo.png" class="logo" alt="Logo de Fisheye">
     </a>
   </nav>
 
-  <header role="banner" class="photograph-header">
+  <header  class="photograph-header">
     <button class="contact_button" onclick="displayModal()" aria-controls="contact_modal">
       Contactez-moi
     </button>
@@ -67,7 +67,7 @@
   </div>
 
   <!-- Contenu principal de la page -->
-  <main id="main" role="main">
+  <main  >
     <section class="tri" aria-label="Options de tri">
       <h1>Trier par</h1>
       <select id="sort-options" aria-label="Trier par" class="custom-select">
@@ -84,18 +84,18 @@
   </main>
 
 
-  <footer class="barre" role="contentinfo">
-    <span class="number" aria-label="Nombre total de likes"></span>
-    <span class="heart" aria-hidden="true">❤</span>
-    <span class="price" aria-label="Prix total"></span>
+  <footer class="barre" >
+    <span class="number" ></span>
+    <span class="heart" >❤</span>
+    <span class="price" ></span>
   </footer>
 
 
   <!-- Modal pour agrandissement -->
   <div id="modal" class="modal" role="dialog"  aria-labelledby="modal-title">
-    <span class="close" aria-label="Fermer la fenêtre d'agrandissement">&times;</span>
-    <span class="prev" aria-label="Image précédente">&#10094;</span>
-    <span class="next" aria-label="Image suivante">&#10095;</span>
+    <span class="close" >&times;</span>
+    <span class="prev" >&#10094;</span>
+    <span class="next" >&#10095;</span>
     <div class="modal-content">
       <div id="modal-media-container"></div>
       <p id="modal-title" aria-live="polite"></p>

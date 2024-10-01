@@ -36,15 +36,6 @@ function genererPhotographe(photographe) {
         photographeElement.appendChild(taglinElement);
         photographeElement.appendChild(priceElement);
 
-        
-        
-        
-
-        
-
-        
-
-
     }
 
 
@@ -58,10 +49,6 @@ async function data() {
     console.log(photographe)
 
     genererPhotographe(photographe);
-
-
-
-
 }
 
 
