@@ -3,7 +3,6 @@ const urlParams = new URLSearchParams(window.location.search);
 const photographerId = urlParams.get('id');
 
 // Affiche l'ID du photographe dans la console pour vérifier que ça fonctionne
-console.log(photographerId);
 
 // Fonction pour afficher les informations du photographe
 async function photographe() {
@@ -12,10 +11,10 @@ async function photographe() {
     const photographers = data.photographers;
 
     const photograph = photographers.find((photographer) => photographer.id == photographerId);
-    console.log(photograph);
 
     const imageElement = document.createElement("img");
-    imageElement.src = photograph.portrait;
+    imageElement.src = `../../assets/photographers/${photograph.portrait}`;
+    
     imageElement.alt = `Photo intitulée ${photograph.name}`;
 
     const nomElement = document.createElement("h2");
@@ -57,11 +56,9 @@ async function getPhotographerById(photographerId, medias) {
         medias = data.media;
     }
 
-    console.log(medias);
 
     // Filtrer les médias du photographe
     const photographerMedias = medias.filter((mediaa) => mediaa.photographerId == photographerId);
-    console.log(photographerMedias);
 
     const imageContainer = document.querySelector(".image");
     imageContainer.innerHTML = ""; // Vider l'élément avant de le remplir
@@ -95,13 +92,13 @@ function mod() {
 
     // Assurez-vous que les articles sont bien sélectionnés
     const mediaItems = Array.from(document.querySelectorAll('.image article'));
-    console.log(mediaItems);
+
 
     const mediaSources = mediaItems.map(item => item.querySelector('img, video')); // Recherche d'images et de vidéos
-    console.log(mediaSources);
+    
 
     const mediaTitles = mediaItems.map(item => item.querySelector('p') ? item.querySelector('p').textContent : ""); // Sélectionner les titres des médias
-    console.log(mediaTitles);
+   
 
     // Attacher les événements aux médias après leur création
     mediaSources.forEach((media, index) => {
@@ -145,9 +142,7 @@ function mod() {
     // Fonction pour ouvrir le modal
     function openModal() {
         modal.style.display = 'block';
-        console.log(mediaSources[currentIndex])
-        console.log(currentIndex)
-        console.log(mediaSources)
+        
         const media = mediaSources[currentIndex].cloneNode(true); // Cloner l'image ou la vidéo
 
 
@@ -173,7 +168,6 @@ async function tri() {
     const medias = data.media;
     const photographerMedias = medias.filter((media) => media.photographerId == photographerId);
 
-    console.log(photographerMedias);
 
     const selectElement = document.getElementById('sort-options');
     selectElement.addEventListener('change', (event) => {
@@ -182,13 +176,12 @@ async function tri() {
 
         if (selectedValue === 'popularite') {
             mediaOrdonnees.sort((a, b) => b.likes - a.likes); // Tri décroissant par likes (popularité)
-            console.log("Option 'Popularité' sélectionnée");
+            
         } else if (selectedValue === 'date') {
             mediaOrdonnees.sort((a, b) => new Date(b.date) - new Date(a.date)); // Tri par date décroissante
-            console.log("Option 'Date' sélectionnée");
+            
         } else if (selectedValue === 'titre') {
             mediaOrdonnees.sort((a, b) => a.title.localeCompare(b.title)); // Tri par ordre alphabétique des titres
-            console.log("Option 'Titre' sélectionnée");
         }
 
         // Réafficher les médias après le tri

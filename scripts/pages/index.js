@@ -4,7 +4,8 @@ function genererPhotographe(photographe) {
         const article = photographe[i];
 
         const imageElement = document.createElement("img");
-        imageElement.src = article.portrait;
+        imageElement.src = `../../assets/photographers/${article.portrait}`;
+        
         const photographerLink = document.createElement('a');
         photographerLink.href = `photographer.html?id=${article.id}`;
         photographerLink.setAttribute('aria-label', `Voir les détails de ${article.name}`);
@@ -46,7 +47,6 @@ async function data() {
     const reponse = await fetch('data/photographers.json');
     const data = await reponse.json();
     const photographe = data.photographers
-    console.log(photographe)
 
     genererPhotographe(photographe);
 }
