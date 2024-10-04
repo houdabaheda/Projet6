@@ -4,14 +4,14 @@ class MediaFactory {
     }
 
     // La méthode `createMediaElement` sera implémentée dans les sous-classes
-    
+
 
     static createMedia(media) {
         if (media.image) {
             return new ImageMedia(media);
         } else if (media.video) {
             return new VideoMedia(media);
-        } 
+        }
     }
 }
 
@@ -43,6 +43,7 @@ class ImageMedia extends MediaFactory {
         const heart = document.createElement("i");
         heart.classList.add('fa-solid', 'fa-heart');
         heart.dataset.id = this.media.id;
+        heart.setAttribute('aria-label', 'Ajouter aux favoris');
 
         const divv = document.createElement("div");
         divv.classList.add("likes-heart");
@@ -65,6 +66,9 @@ class VideoMedia extends MediaFactory {
         const sourceElement = document.createElement("source");
         sourceElement.src = `../../assets/images/${this.media.video}`;
         sourceElement.type = "video/mp4";
+
+        sourceElement.setAttribute("aria-label", this.media.title);
+
         video.appendChild(sourceElement);
 
         const titleLikes = this.createTitleLikesHeart();
@@ -87,6 +91,8 @@ class VideoMedia extends MediaFactory {
         const heart = document.createElement("i");
         heart.classList.add('fa-solid', 'fa-heart');
         heart.dataset.id = this.media.id;
+        heart.setAttribute('aria-label', 'Ajouter aux favoris');
+
 
         const divv = document.createElement("div");
         divv.classList.add("likes-heart");

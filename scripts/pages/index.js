@@ -5,6 +5,8 @@ function genererPhotographe(photographe) {
 
         const imageElement = document.createElement("img");
         imageElement.src = `../../assets/photographers/${article.portrait}`;
+        imageElement.alt = `Photo intitulée ${article.name}`;
+
 
         const photographerLink = document.createElement('a');
         photographerLink.href = `photographer.html?id=${article.id}`;

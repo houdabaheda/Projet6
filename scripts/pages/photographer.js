@@ -5,47 +5,52 @@ const photographerId = urlParams.get('id');
 
 
 async function photographe() {
-    try {
+    try{
         const reponse = await fetch('data/photographers.json');
-        if (!reponse.ok) throw new Error(`Erreur : ${reponse.status} ${reponse.statusText}`);
-        
         const data = await reponse.json();
         const photographers = data.photographers;
+    
         const photograph = photographers.find((photographer) => photographer.id == photographerId);
-
+    
         const imageElement = document.createElement("img");
         imageElement.src = `../../assets/photographers/${photograph.portrait}`;
+        
         imageElement.alt = `Photo intitulée ${photograph.name}`;
-
+    
         const nomElement = document.createElement("h2");
         nomElement.innerText = photograph.name;
-
+    
         const cityElemnt = document.createElement("h3");
-        cityElemnt.innerText = `${photograph.city},${photograph.country}`;
-
+        cityElemnt.innerText =`${photograph.city},${photograph.country}`;
+    
         const taglinElement = document.createElement("h4");
         taglinElement.innerText = photograph.tagline;
-
+    
         const sectionFiches = document.querySelector(".photograph-header");
         const info = document.createElement("div");
+    
+        const contac = document.querySelector(".contact ");
+        const contact = document.createElement("h3");
+        contact.innerText = photograph.name;
+        contac.appendChild(contact)
+    
+        const barre = document.querySelector(".barre .price");
+        barre.innerText = `${photograph.price} €/jour`;
+    
         info.classList.add('info');
         info.appendChild(nomElement);
         info.appendChild(cityElemnt);
         info.appendChild(taglinElement);
         sectionFiches.appendChild(info);
-
-        const contac = document.querySelector(".contact ");
-        const contact = document.createElement("h3");
-        contact.innerText = photograph.name;
-        contac.appendChild(contact);
-
-        const barre = document.querySelector(".barre .price");
-        barre.innerText = `${photograph.price} €/jour`;
-
+    
+        const button = document.querySelector(".contact_button");
+        sectionFiches.appendChild(button);
         sectionFiches.appendChild(imageElement);
-    } catch (error) {
+
+    }catch (error) {
         console.error("Erreur lors du chargement des informations du photographe :", error);
     }
+
 }
 
 async function getPhotographerById(photographerId, medias) {
