@@ -2,84 +2,84 @@
 const urlParams = new URLSearchParams(window.location.search);
 const photographerId = urlParams.get('id');
 
-// Affiche l'ID du photographe dans la console pour vérifier que ça fonctionne
 
-// Fonction pour afficher les informations du photographe
+
 async function photographe() {
-    const reponse = await fetch('data/photographers.json');
-    const data = await reponse.json();
-    const photographers = data.photographers;
-
-    const photograph = photographers.find((photographer) => photographer.id == photographerId);
-
-    const imageElement = document.createElement("img");
-    imageElement.src = `../../assets/photographers/${photograph.portrait}`;
-    
-    imageElement.alt = `Photo intitulée ${photograph.name}`;
-
-    const nomElement = document.createElement("h2");
-    nomElement.innerText = photograph.name;
-
-    const cityElemnt = document.createElement("h3");
-    cityElemnt.innerText = `${photograph.city},${photograph.country}`;
-
-    const taglinElement = document.createElement("h4");
-    taglinElement.innerText = photograph.tagline;
-
-    const sectionFiches = document.querySelector(".photograph-header");
-    const info = document.createElement("div");
-
-    const contac = document.querySelector(".contact ");
-    const contact = document.createElement("h3");
-    contact.innerText = photograph.name;
-    contac.appendChild(contact)
-
-    const barre = document.querySelector(".barre .price");
-    barre.innerText = `${photograph.price} €/jour`;
-
-    info.classList.add('info');
-    info.appendChild(nomElement);
-    info.appendChild(cityElemnt);
-    info.appendChild(taglinElement);
-    sectionFiches.appendChild(info);
-
-    const button = document.querySelector(".contact_button");
-    sectionFiches.appendChild(button);
-    sectionFiches.appendChild(imageElement);
-}
-
-// Fonction pour récupérer et afficher les médias du photographe
-async function getPhotographerById(photographerId, medias) {
-    if (!medias) {
+    try {
         const reponse = await fetch('data/photographers.json');
+        if (!reponse.ok) throw new Error(`Erreur : ${reponse.status} ${reponse.statusText}`);
+        
         const data = await reponse.json();
-        medias = data.media;
+        const photographers = data.photographers;
+        const photograph = photographers.find((photographer) => photographer.id == photographerId);
+
+        const imageElement = document.createElement("img");
+        imageElement.src = `../../assets/photographers/${photograph.portrait}`;
+        imageElement.alt = `Photo intitulée ${photograph.name}`;
+
+        const nomElement = document.createElement("h2");
+        nomElement.innerText = photograph.name;
+
+        const cityElemnt = document.createElement("h3");
+        cityElemnt.innerText = `${photograph.city},${photograph.country}`;
+
+        const taglinElement = document.createElement("h4");
+        taglinElement.innerText = photograph.tagline;
+
+        // Ajouter les éléments dans le DOM
+        const sectionFiches = document.querySelector(".photograph-header");
+        const info = document.createElement("div");
+        info.classList.add('info');
+        info.appendChild(nomElement);
+        info.appendChild(cityElemnt);
+        info.appendChild(taglinElement);
+        sectionFiches.appendChild(info);
+
+        const contac = document.querySelector(".contact ");
+        const contact = document.createElement("h3");
+        contact.innerText = photograph.name;
+        contac.appendChild(contact);
+
+        const barre = document.querySelector(".barre .price");
+        barre.innerText = `${photograph.price} €/jour`;
+
+        sectionFiches.appendChild(imageElement);
+    } catch (error) {
+        console.error("Erreur lors du chargement des informations du photographe :", error);
     }
-
-
-    // Filtrer les médias du photographe
-    const photographerMedias = medias.filter((mediaa) => mediaa.photographerId == photographerId);
-
-    const imageContainer = document.querySelector(".image");
-    imageContainer.innerHTML = ""; // Vider l'élément avant de le remplir
-
-    // Parcourir les médias du photographe et les afficher
-    // Parcourir les médias du photographe et les afficher
-    photographerMedias.forEach((media) => {
-        // eslint-disable-next-line no-undef
-        const mediaInstance = MediaFactory.createMedia(media); // Appel à la méthode static
-        const mediaElement = mediaInstance.createMediaElement();
-        imageContainer.appendChild(mediaElement);
-    });
-
-    // Appeler la fonction `mod` après l'ajout des éléments au DOM
-
-    // eslint-disable-next-line no-undef
-    addLike();
-    mod(); // Appeler la fonction pour gérer les likes
 }
 
-// Fonction pour gérer le mo dal
+async function getPhotographerById(photographerId, medias) {
+    try {
+        if (!medias) {
+            const reponse = await fetch('data/photographers.json');
+            if (!reponse.ok) throw new Error(`Erreur : ${reponse.status} ${reponse.statusText}`);
+            
+            const data = await reponse.json();
+            medias = data.media;
+        }
+
+        const photographerMedias = medias.filter((media) => media.photographerId == photographerId);
+        const imageContainer = document.querySelector(".image");
+        imageContainer.innerHTML = "";
+
+        photographerMedias.forEach((media) => {
+            // eslint-disable-next-line no-undef
+            const mediaInstance = MediaFactory.createMedia(media);
+            const mediaElement = mediaInstance.createMediaElement();
+            imageContainer.appendChild(mediaElement);
+        });
+
+        // eslint-disable-next-line no-undef
+        addLike();
+        
+        mod(); 
+    } catch (error) {
+        console.error("Erreur lors du chargement des médias :", error);
+    }
+}
+
+
 function mod() {
     const modal = document.getElementById('modal');
     const modalMediaContainer = document.getElementById('modal-media-container');
@@ -163,30 +163,32 @@ getPhotographerById(photographerId);
 
 // Fonction de tri des médias
 async function tri() {
-    const reponse = await fetch('data/photographers.json');
-    const data = await reponse.json();
-    const medias = data.media;
-    const photographerMedias = medias.filter((media) => media.photographerId == photographerId);
+    try {
+        const reponse = await fetch('data/photographers.json');
+        if (!reponse.ok) throw new Error(`Erreur : ${reponse.status} ${reponse.statusText}`);
+        
+        const data = await reponse.json();
+        const medias = data.media;
+        const photographerMedias = medias.filter((media) => media.photographerId == photographerId);
 
+        const selectElement = document.getElementById('sort-options');
+        selectElement.addEventListener('change', (event) => {
+            const selectedValue = event.target.value;
+            let mediaOrdonnees = Array.from(photographerMedias);
 
-    const selectElement = document.getElementById('sort-options');
-    selectElement.addEventListener('change', (event) => {
-        const selectedValue = event.target.value;
-        let mediaOrdonnees = Array.from(photographerMedias);
+            if (selectedValue === 'popularite') {
+                mediaOrdonnees.sort((a, b) => b.likes - a.likes);
+            } else if (selectedValue === 'date') {
+                mediaOrdonnees.sort((a, b) => new Date(b.date) - new Date(a.date));
+            } else if (selectedValue === 'titre') {
+                mediaOrdonnees.sort((a, b) => a.title.localeCompare(b.title));
+            }
 
-        if (selectedValue === 'popularite') {
-            mediaOrdonnees.sort((a, b) => b.likes - a.likes); // Tri décroissant par likes (popularité)
-            
-        } else if (selectedValue === 'date') {
-            mediaOrdonnees.sort((a, b) => new Date(b.date) - new Date(a.date)); // Tri par date décroissante
-            
-        } else if (selectedValue === 'titre') {
-            mediaOrdonnees.sort((a, b) => a.title.localeCompare(b.title)); // Tri par ordre alphabétique des titres
-        }
-
-        // Réafficher les médias après le tri
-        getPhotographerById(photographerId, mediaOrdonnees);
-    });
+            getPhotographerById(photographerId, mediaOrdonnees);
+        });
+    } catch (error) {
+        console.error("Erreur lors du tri des médias :", error);
+    }
 }
 
 tri();

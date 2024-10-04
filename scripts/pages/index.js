@@ -5,11 +5,11 @@ function genererPhotographe(photographe) {
 
         const imageElement = document.createElement("img");
         imageElement.src = `../../assets/photographers/${article.portrait}`;
-        
+
         const photographerLink = document.createElement('a');
         photographerLink.href = `photographer.html?id=${article.id}`;
         photographerLink.setAttribute('aria-label', `Voir les détails de ${article.name}`);
-       
+
 
         const nomElement = document.createElement("h2");
         nomElement.innerText = article.name;
@@ -17,11 +17,11 @@ function genererPhotographe(photographe) {
         const cityElemnt = document.createElement("h3");
         cityElemnt.innerText = `${article.city},${article.country} `;
 
-        const taglinElement =document.createElement("h4");
-        taglinElement.innerText= article.tagline;
+        const taglinElement = document.createElement("h4");
+        taglinElement.innerText = article.tagline;
 
-        const priceElement =document.createElement("h5");
-        priceElement.innerText=`${article.price} €/jour`;
+        const priceElement = document.createElement("h5");
+        priceElement.innerText = `${article.price} €/jour`;
 
 
 
@@ -44,11 +44,21 @@ function genererPhotographe(photographe) {
 }
 
 async function data() {
-    const reponse = await fetch('data/photographers.json');
-    const data = await reponse.json();
-    const photographe = data.photographers
+    try {
+        const reponse = await fetch('data/photographers.json');
+        if (!reponse.ok) {
+            throw new Error(`Erreur : ${reponse.status} ${reponse.statusText}`);
+        }
+        const data = await reponse.json();
+        const photographe = data.photographers;
 
-    genererPhotographe(photographe);
+        genererPhotographe(photographe);
+    } catch (error) {
+        console.error("Les données des photographes ne sont pas disponibles :", error);
+        // Optionnel : afficher un message d'erreur sur la page
+        const sectionFiches = document.querySelector(".photographer_section");
+        sectionFiches.innerHTML = "<p>Les données des photographes ne peuvent pas être chargées pour le moment. Veuillez réessayer plus tard.</p>";
+    }
 }
 
 
