@@ -26,7 +26,6 @@ async function photographe() {
         const taglinElement = document.createElement("h4");
         taglinElement.innerText = photograph.tagline;
 
-        // Ajouter les éléments dans le DOM
         const sectionFiches = document.querySelector(".photograph-header");
         const info = document.createElement("div");
         info.classList.add('info');
@@ -73,14 +72,14 @@ async function getPhotographerById(photographerId, medias) {
         // eslint-disable-next-line no-undef
         addLike();
         
-        mod(); 
+        modale(); 
     } catch (error) {
         console.error("Erreur lors du chargement des médias :", error);
     }
 }
 
 
-function mod() {
+function modale() {
     const modal = document.getElementById('modal');
     const modalMediaContainer = document.getElementById('modal-media-container');
     const modalTitle = document.getElementById('modal-title');
@@ -90,17 +89,15 @@ function mod() {
 
     let currentIndex = 0;
 
-    // Assurez-vous que les articles sont bien sélectionnés
     const mediaItems = Array.from(document.querySelectorAll('.image article'));
 
 
-    const mediaSources = mediaItems.map(item => item.querySelector('img, video')); // Recherche d'images et de vidéos
+    const mediaSources = mediaItems.map(item => item.querySelector('img, video')); 
     
 
-    const mediaTitles = mediaItems.map(item => item.querySelector('p') ? item.querySelector('p').textContent : ""); // Sélectionner les titres des médias
+    const mediaTitles = mediaItems.map(item => item.querySelector('p') ? item.querySelector('p').textContent : ""); 
    
 
-    // Attacher les événements aux médias après leur création
     mediaSources.forEach((media, index) => {
         if (media) {
             media.addEventListener('click', () => {
@@ -139,30 +136,28 @@ function mod() {
         }
     });
 
-    // Fonction pour ouvrir le modal
     function openModal() {
         modal.style.display = 'block';
         
-        const media = mediaSources[currentIndex].cloneNode(true); // Cloner l'image ou la vidéo
+        const media = mediaSources[currentIndex].cloneNode(true); 
 
 
-        // Pour les vidéos, s'assurer que les contrôles sont toujours activés
         if (media.tagName.toLowerCase() === 'video') {
             media.controls = true;
         }
 
-        modalMediaContainer.innerHTML = ''; // Réinitialise le contenu du modal
-        modalMediaContainer.appendChild(media); // Ajoute le média cloné au modal
-        modalTitle.textContent = mediaTitles[currentIndex]; // Affiche le titre correspondant
+        modalMediaContainer.innerHTML = ''; 
+        modalMediaContainer.appendChild(media);
+        modalTitle.textContent = mediaTitles[currentIndex];
     }
 }
 
-// Appel des fonctions au chargement de la page
 photographe();
 getPhotographerById(photographerId);
 
-// Fonction de tri des médias
-async function tri() {
+
+
+async function sortPhotographerMedia() {
     try {
         const reponse = await fetch('data/photographers.json');
         if (!reponse.ok) throw new Error(`Erreur : ${reponse.status} ${reponse.statusText}`);
@@ -191,4 +186,4 @@ async function tri() {
     }
 }
 
-tri();
+sortPhotographerMedia();

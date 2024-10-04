@@ -55,7 +55,7 @@ async function data() {
         genererPhotographe(photographe);
     } catch (error) {
         console.error("Les données des photographes ne sont pas disponibles :", error);
-        // Optionnel : afficher un message d'erreur sur la page
+        
         const sectionFiches = document.querySelector(".photographer_section");
         sectionFiches.innerHTML = "<p>Les données des photographes ne peuvent pas être chargées pour le moment. Veuillez réessayer plus tard.</p>";
     }
