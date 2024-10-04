@@ -13,61 +13,63 @@
 </head>
 
 <body>
-  <nav  aria-label="Navigation principale">
-    <a href="index.html">
-      <img src="assets/images/logo.png" class="logo" alt="Logo de Fisheye">
-    </a>
-  </nav>
+  <div class="container">
+    <nav aria-label="Navigation principale">
+      <a href="index.html">
+        <img src="assets/images/logo.png" class="logo" alt="Logo de Fisheye">
+      </a>
+    </nav>
 
-  <header  class="photograph-header">
-    <button class="contact_button" onclick="displayModal()" aria-controls="contact_modal">
-      Contactez-moi
-    </button>
-  </header>
+    <header class="photograph-header">
+      <button class="contact_button" id="contactButton" aria-controls="contact_modal">
+        Contactez-moi
+      </button>
+    </header>
 
-  <div id="contact_modal" >
-    <div class="modall">
-      <header>
-        <div class="contact">
-          <h2>Contactez-moi</h2>
+    <div id="contact_modal">
+      <div class="modall">
+        <header>
+          <div class="contact">
+            <h2>Contactez-moi</h2>
+          </div>
+          <img id="closeModalButton" src="assets/icons/close.svg" alt="Fermer"
+            aria-label="Fermer la fenêtre de contact">
+        </header>
+
+        <div class="form">
+
+          <div class="formData prenom">
+            <label for="first">Prénom</label><br>
+            <input class="text-control" type="text" id="first" name="first" minlength="2"><br>
+            <span class="error-message " id="prenomError"></span>
+          </div>
+
+          <div class="formData nom">
+            <label for="last">Nom</label><br>
+            <input class="text-control" type="text" id="last" name="last"><br>
+            <span class="error-message " id="nomError"></span>
+          </div>
+
+          <div class="formData">
+            <label for="email">E-mail</label><br>
+            <input class="text-control" type="email" id="email" name="email"><br>
+            <span class="error-message" id="emailError"></span>
+          </div>
+
+          <div class="formData">
+            <label for="message">Votre message</label><br>
+            <textarea name="message" id="message" rows="4" cols="50"></textarea>
+            <span class="error-message" id="messageError"></span>
+          </div>
+
+          <button class="contact_button_envoyer" aria-label="Envoyer le formulaire">Envoyer</button>
         </div>
-        <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer" aria-label="Fermer la fenêtre de contact">
-      </header>
-      
-      <div class="form" >
 
-        <div class="formData prenom">
-          <label for="first">Prénom</label><br>
-          <input class="text-control" type="text" id="first" name="first" minlength="2"><br>
-          <span class="error-message " id="prenomError"></span>
-        </div>
-
-        <div class="formData nom">
-          <label for="last">Nom</label><br>
-          <input class="text-control" type="text" id="last" name="last"><br>
-          <span class="error-message " id="nomError"></span>
-        </div>
-
-        <div class="formData">
-          <label for="email">E-mail</label><br>
-          <input class="text-control" type="email" id="email" name="email"><br>
-          <span class="error-message" id="emailError"></span>
-        </div>
-
-        <div class="formData">
-          <label for="message">Votre message</label><br>
-          <textarea name="message" id="message" rows="4" cols="50"></textarea>
-          <span class="error-message" id="messageError"></span>
-        </div>
-
-        <button class="contact_button_envoyer" aria-label="Envoyer le formulaire">Envoyer</button>
       </div>
-
     </div>
-  </div>
 
   <!-- Contenu principal de la page -->
-  <main  >
+  <main>
     <section class="tri" aria-label="Options de tri">
       <h1>Trier par</h1>
       <select id="sort-options" aria-label="Trier par" class="custom-select">
@@ -84,18 +86,19 @@
   </main>
 
 
-  <footer class="barre" >
-    <span class="number" ></span>
-    <span class="heart" aria-label="Ajouter aux favoris" >❤</span>
-    <span class="price" ></span>
+  <footer class="barre">
+    <span class="number"></span>
+    <span class="heart" aria-label="Ajouter aux favoris">❤</span>
+    <span class="price"></span>
   </footer>
+  </div>
 
 
   <!-- Modal pour agrandissement -->
-  <div id="modal" class="modal" role="dialog"  aria-labelledby="modal-title">
-    <span class="close" aria-label="Fermer la modale" >&times;</span>
-    <span class="prev" aria-label="media passé">&#10094;</span>
-    <span class="next" aria-label="media suivante" >&#10095;</span>
+  <div id="modal" class="modal" role="dialog" aria-labelledby="modal-title">
+    <span class="close"><img src="assets/icons/close.jpg" alt="Fermer le modale"></span>
+    <span class="prev"><img src="assets/icons/pres.jpg" alt="media passé"></span>
+    <span class="next"><img src="assets/icons/next.jpg" alt="media suivante"></span>
     <div class="modal-content">
       <div id="modal-media-container"></div>
       <p id="modal-title" aria-live="polite"></p>

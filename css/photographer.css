@@ -2,10 +2,13 @@
     display: none;
 }
 
-.logo {
+nav{
     margin-left: 0px;
     margin-top: 50px;
     margin-bottom: 50px;
+}
+.logo{
+    margin-left: 0%;
 }
 
 body {
@@ -309,7 +312,7 @@ body {
     height: 100%;
     overflow: auto;
 
-    background-color: rgb(255 255 255 / 94%);
+    background-color:white;
 }
 
 .modal-content {
@@ -364,7 +367,8 @@ body {
     color: #901C1C;
 }
 
-.close  {
+
+.close   {
     right: 16%;
     top: 18px;
     cursor: pointer;
@@ -375,7 +379,7 @@ body {
 
 .prev {
     left: 16%;
-    top: 50%;
+    top: 51%;
     transform: translateY(-50%);
 }
 
@@ -412,4 +416,44 @@ body {
 .barre .price {
     color: #333;
     font-weight: bold;
+}
+
+
+
+/* Style de focus pour les éléments interactifs */
+:focus {
+    outline: 3px solid rgb(33, 110, 224); /* Couleur bleue autour de l'élément */
+    outline-offset: 4px; /* Espacement entre le contour et l'élément */
+}
+
+/* Style de focus pour les boutons */
+button:focus, .contact_button:focus {
+    outline: 3px solid #DB8876; /* Couleur orange pour les boutons */
+    outline-offset: 3px;
+    background-color: #DB8876; /* Change la couleur de fond du bouton au focus */
+    color: white; /* Change la couleur du texte au focus */
+}
+
+/* Focus pour les icônes de like */
+.fa-heart:focus {
+    outline: 3px solid #DB8876  ; /* Contour rose pour les icônes de like */
+    outline-offset: 3px;
+}
+
+/* Focus pour les images et vidéos */
+.image img:focus, .image video:focus {
+    outline: 3px solid #DB8876; /* Contour vert pour les images et vidéos */
+    outline-offset: 4px;
+}
+
+/* Focus pour le bouton de fermeture de la modale */
+#closeModalButton:focus {
+    outline: 3px solid #f44336; /* Contour rouge pour le bouton de fermeture */
+    outline-offset: 4px;
+}
+
+/* Style général pour améliorer l'accessibilité de l'interface */
+:focus-visible {
+    outline: 3px solid rgb(33, 110, 224)           ; /* Contour bleu clair pour tout focus visible */
+    outline-offset: 4px;
 }

@@ -52,6 +52,65 @@ async function photographe() {
     }
 
 }
+// Ajout du focus et des gestionnaires d'événements pour le clavier sur les éléments interactifs
+function addAccessibilityFeatures() {
+    
+    const mediaElements = document.querySelectorAll('.image article img, .image article video');
+    const likeButtons = document.querySelectorAll('.fa-heart');
+    const contactButton = document.querySelector('.contact_button');
+   const  modalCloseButton =document.getElementById('closeModalButton');
+   
+
+
+    mediaElements.forEach((element) => {
+        element.setAttribute('tabindex', '0'); 
+
+        element.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { 
+                e.preventDefault();
+                element.click(); 
+            }
+        });
+    });
+
+    likeButtons.forEach((button) => {
+        button.setAttribute('tabindex', '0');
+
+        button.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                button.click(); 
+            }
+        });
+    });
+
+  
+
+    if (contactButton) {
+        contactButton.setAttribute('tabindex', '0');
+        contactButton.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                contactButton.click(); 
+            }
+        });
+    }
+
+    if (modalCloseButton) {
+        modalCloseButton.setAttribute('tabindex', '0');
+
+        modalCloseButton.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                modalCloseButton.click(); 
+            }
+        });
+    }
+
+  
+}
+
+
 
 async function getPhotographerById(photographerId, medias) {
     try {
@@ -62,6 +121,8 @@ async function getPhotographerById(photographerId, medias) {
             const data = await reponse.json();
             medias = data.media;
         }
+
+        
 
         const photographerMedias = medias.filter((media) => media.photographerId == photographerId);
         const imageContainer = document.querySelector(".image");
@@ -74,9 +135,9 @@ async function getPhotographerById(photographerId, medias) {
             imageContainer.appendChild(mediaElement);
         });
 
+        addAccessibilityFeatures()          
         // eslint-disable-next-line no-undef
-        addLike();
-        
+        addLike(); 
         modale(); 
     } catch (error) {
         console.error("Erreur lors du chargement des médias :", error);
@@ -91,6 +152,7 @@ function modale() {
     const closeModal = document.querySelector('.close');
     const prev = document.querySelector('.prev');
     const next = document.querySelector('.next');
+    const containeer =document.querySelector(".container")
 
     let currentIndex = 0;
 
@@ -114,6 +176,8 @@ function modale() {
 
     closeModal.addEventListener('click', () => {
         modal.style.display = 'none';
+        containeer.style.display='block';
+
     });
 
     prev.addEventListener('click', () => {
@@ -137,12 +201,14 @@ function modale() {
                 openModal();
             } else if (e.key === 'Escape') {
                 modal.style.display = 'none';
+                containeer.style.display='block';
             }
         }
     });
 
     function openModal() {
         modal.style.display = 'block';
+        containeer.style.display='none';
         
         const media = mediaSources[currentIndex].cloneNode(true); 
 

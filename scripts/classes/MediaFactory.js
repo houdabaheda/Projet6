@@ -41,9 +41,10 @@ class ImageMedia extends MediaFactory {
         likes.innerText = this.media.likes;
 
         const heart = document.createElement("i");
+        heart.setAttribute('aria-label', 'Ajouter aux favoris');
+
         heart.classList.add('fa-solid', 'fa-heart');
         heart.dataset.id = this.media.id;
-        heart.setAttribute('aria-label', 'Ajouter aux favoris');
 
         const divv = document.createElement("div");
         divv.classList.add("likes-heart");
@@ -63,11 +64,11 @@ class VideoMedia extends MediaFactory {
         const bloc = document.createElement("article");
         const video = document.createElement("video");
         video.controls = false;
+        video.setAttribute("aria-label", `Vidéo: ${this.media.title}`);
         const sourceElement = document.createElement("source");
         sourceElement.src = `../../assets/images/${this.media.video}`;
         sourceElement.type = "video/mp4";
 
-        sourceElement.setAttribute("aria-label", this.media.title);
 
         video.appendChild(sourceElement);
 
@@ -92,6 +93,12 @@ class VideoMedia extends MediaFactory {
         heart.classList.add('fa-solid', 'fa-heart');
         heart.dataset.id = this.media.id;
         heart.setAttribute('aria-label', 'Ajouter aux favoris');
+
+
+
+
+    
+
 
 
         const divv = document.createElement("div");
